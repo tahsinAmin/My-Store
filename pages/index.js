@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Navbar from '../components/navbar'
 
 const Home = (prop) => {
   return (
