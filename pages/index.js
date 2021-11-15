@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import baseUrl from '../helpers/baseUrl'
 
 const Home = ({products}) => {
-  // console.log(products);
+  console.log(products);
   const productList= products.map(product => (  
     <div key={product._id} className="bg-white shadow-md border border-gray-200 rounded-lg max-w-sm">
         <div className='relative md:h-20 md:w-20 lg:h-56 lg:w-full'>
@@ -38,7 +39,7 @@ const Home = ({products}) => {
 
 // We use getSTatic props when it is not user specific (i.e. a welcome screen which is same for all users. getServerSide is user specific, for example, going to a cart whihc is unique to each user)
 export async function getStaticProps() { // only runs in server side
-  const res = await fetch('http://localhost:3000/api/products');
+  const res = await fetch(`${baseUrl}/api/products`);
   const data = await res.json();
   return {
     props: {products:data}, // will be passed to the page component as props
