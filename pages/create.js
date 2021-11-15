@@ -1,16 +1,57 @@
 import React from 'react'
 import { useState } from 'react'
 import Image from 'next/image'
+import baseUrl from '../helpers/baseUrl'
 
 export default function create() {
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [description, setDescription] = useState("")
   const [media, setMedia] = useState("")
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, price, media, description);
+    try{
+      const mediaUrl = await imageUpload()
+      console.log(name, price, media, description);
+      const res = await fetch(`${baseUrl}/api/products`, {
+        method: "POST",
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          name, 
+          price, 
+          description, 
+          mediaUrl
+        })
+      })
+      const res2 =  await res.json()
+      if(res2.error){
+        alert(res2.error)
+      }else {
+        alert("Product Saved!")
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+    
   }
+
+  const imageUpload = async() => {
+    const data = new FormData();
+    data.append('file', media);
+    data.append('upload_preset', 'mystore')
+    data.append('cloud_name','opdopd')
+    const res = await fetch('https://api.cloudinary.com/v1_1/opdopd/image/upload',{
+      method: "POST",
+      body:data
+    })
+    const res2 = await res.json()
+    console.log(res2);
+    return res2.url;
+  }
+
   return (
     <form className='w-10/12 mx-auto' onSubmit={(e) => handleSubmit(e)}>      
       <div className="mb-6">

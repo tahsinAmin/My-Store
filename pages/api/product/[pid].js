@@ -1,4 +1,6 @@
 import Product from '../../../models/product'
+import initDB from "../../helpers/initDB"
+initDB();
 
 export default async function ProductId(req,res) {
    switch(req.method){
