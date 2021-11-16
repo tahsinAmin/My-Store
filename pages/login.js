@@ -1,11 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
+import {useState} from 'react'
 
-export default function login() {
+export default function Login() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   return (
-    <div>
-      <h1 className='text-2xl font-bold'>login Page</h1>
-      <Link href='/'><a className='text-purple-900 underline'>Go to Home Page</a></Link>
+    <div className='w-10/12 mx-auto'>
+      <h1 className='text-2xl font-bold'>Login Page</h1>
+      <form>
+        <div className="mb-6">
+          <label for="email" className="text-sm font-medium text-gray-900 block mb-2">Your Email</label>
+          <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@flowbite.com" required/>
+        </div>
+        <div className="mb-6">
+          <label for="password" className="text-sm font-medium text-gray-900 block mb-2">Your password</label>
+          <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)}id="password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
+        </div>
+        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+      </form>
+      <Link href='/signup'><a className='text-purple-900 underline'>Don't have an Account?</a></Link>
     </div>
   )
 }

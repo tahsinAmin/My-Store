@@ -33,3 +33,7 @@ Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&ut
 # Flowbite has been used
 
 # I learned how to show image below file input and also how to take a file
+
+# 9th Commit. Learned how to upload image
+
+# Still toast and nprogress needs to be added.
