@@ -30,6 +30,8 @@ Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&ut
 
 # npm i dotenv
 
+# npm install bcrypt jsonwebtoken js-cookie
+
 # Flowbite has been used
 
 # I learned how to show image below file input and also how to take a file

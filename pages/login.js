@@ -1,20 +1,51 @@
 import React from 'react'
 import Link from 'next/link'
 import {useState} from 'react'
-
+import baseUrl from '../helpers/baseUrl'
+import cookie from 'js-cookie'
+import {useRouter} from 'next/router'
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  const router = useRouter()
+
+  const userLogin = async (e)=>{
+    e.preventDefault()
+    try{
+      const res = await fetch(`${baseUrl}/api/login`, {
+        method: "POST",
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          email,
+          password
+        })
+      })
+      const res2 =  await res.json()
+      if(res2.error){
+        alert(res2.error)
+      }else{
+        console.log(res2)
+        cookie.set('token',res2.token)	
+        cookie.set('user',res2.user)	
+        router.push('/account')
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
   return (
     <div className='w-10/12 mx-auto'>
       <h1 className='text-2xl font-bold'>Login Page</h1>
-      <form>
+      <form onSubmit={(e) => userLogin(e)}>
         <div className="mb-6">
-          <label for="email" className="text-sm font-medium text-gray-900 block mb-2">Your Email</label>
+          <label htmlFor="email" className="text-sm font-medium text-gray-900 block mb-2">Your Email</label>
           <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@flowbite.com" required/>
         </div>
         <div className="mb-6">
-          <label for="password" className="text-sm font-medium text-gray-900 block mb-2">Your password</label>
+          <label htmlFor="password" className="text-sm font-medium text-gray-900 block mb-2">Your password</label>
           <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)}id="password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
         </div>
         <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
