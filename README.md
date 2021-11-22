@@ -28,9 +28,11 @@ yarn create next-app --example with-tailwindcss with-tailwindcss-app
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
-# npm i dotenv
+## npm i dotenv
 
 # npm install bcrypt jsonwebtoken js-cookie
+
+# npm i nookies
 
 # Flowbite has been used
 

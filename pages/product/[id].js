@@ -1,9 +1,13 @@
 import { useRouter } from "next/router";
 import baseUrl from "../../helpers/baseUrl";
+import {parseCookies} from 'nookies'
 import Image from 'next/image'
 
 function Product({ product }) {
    const router = useRouter()
+   const cookieuser = parseCookies();
+   const user = cookieuser.user? JSON.parse(cookieuser.user): ""
+
    if(router.isFallback){
       return <h3>Loading...</h3>
    }
@@ -34,12 +38,15 @@ function Product({ product }) {
           <button className='py-2 px-6 bg-gray-400 text-white font-semibold border-2 shadow-sm'>Add + </button>
           <p className="font-normal text-gray-700 mb-3">{product.description}</p>
           
-          <button
-           className="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" 
-           type="button"
-           data-modal-toggle="default-modal">
-           Delete
-          </button>
+          { user.role == 'admin' && user.role == 'root'
+              &&
+            <button
+              className="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" 
+              type="button"
+              data-modal-toggle="default-modal">
+              Delete
+            </button>
+          }
 
           <div id="default-modal" aria-hidden="true" className="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">
             <div className="relative w-full max-w-2xl px-4 h-full md:h-auto">

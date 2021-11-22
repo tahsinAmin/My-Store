@@ -1,5 +1,5 @@
 import Product from '../../../models/product'
-import initDB from "../../helpers/initDB"
+import initDB from "../../../helpers/initDB"
 initDB();
 
 export default async function ProductId(req,res) {

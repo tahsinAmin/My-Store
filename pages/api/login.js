@@ -10,7 +10,7 @@ export default async (req,res)=>{
    const {email,password} = req.body
    try{
       if(!email || !password){
-         return res.status(422).json({error:"Please ass all the fields."})
+         return res.status(422).json({error:"Please add all the fields."})
       }
       const user = await User.findOne({email})
       if(!user){

@@ -1,6 +1,7 @@
 import initDB from '../../helpers/initDB'
 import User from '../../models/user'
 import bcrypt from 'bcrypt'
+import Cart from '../../models/cart'
 
 initDB()
 
@@ -21,7 +22,14 @@ export default async (req, res) => {
          email,
          password:hashedPassword
       }).save()
+
+      const newCart = await new Cart({
+         user: newUser._id
+      }).save()
+
+
       console.log(newUser);
+
       res.status(201).json({message:"Sign Up Success"})
    }catch(err){
       console.log(err);

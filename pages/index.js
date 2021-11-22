@@ -10,10 +10,7 @@ const Home = ({products}) => {
           <Image
            className="rounded-t-lg" 
            src={product.mediaUrl}
-          //  width={40}
-          //  height={40}
            layout="fill"
-          //  objectFit="cover"
            alt={product.name}/>
         </div>
         <div className="p-5">
